@@ -1,0 +1,115 @@
+{% comment %} <!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在庫管理アプリ</title>
+</head>
+<body>
+    <h1>在庫管理システム</h1>
+    <hr>
+
+    <ul>
+    <li>登録商品数：{{ total_products }} 件</li>
+    <li>
+        <a href="{% url 'final:filtered_products' %}?filter=out_of_stock">
+        在庫切れ商品：{{ out_of_stock_count }} 件
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'final:filtered_products' %}?filter=low_stock">
+        在庫少ない商品：{{ low_stock_count }} 件
+        </a>
+    </li>
+    </ul>
+
+    <a href="{% url 'final:product_list' %}">商品一覧</a>
+    <a href="{% url 'final:product_add' %}">新規登録</a>
+</body>
+</html>
+ {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>在庫管理システム</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card h5 {
+      font-weight: bold;
+    }
+    .navbar-brand {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">在庫管理システム</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'final:product_list' %}">商品一覧</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'final:product_add' %}">新規登録</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <div class="container mt-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card border-primary shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">登録商品数</h5>
+            <p class="display-6 text-primary">{{ total_products }} 件</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-danger shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              <a href="{% url 'final:filtered_products' %}?filter=out_of_stock" class="text-danger text-decoration-none stretched-link">在庫切れ商品</a>
+            </h5>
+            <p class="display-6 text-danger">{{ out_of_stock_count }} 件</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-warning shadow-sm">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+              <a href="{% url 'final:filtered_products' %}?filter=low_stock" class="text-warning text-decoration-none stretched-link">在庫少ない商品</a>
+            </h5>
+            <p class="display-6 text-warning">{{ low_stock_count }} 件</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ボタン（操作リンク） -->
+    <div class="text-center mt-5">
+      <a href="{% url 'final:product_list' %}" class="btn btn-outline-primary btn-lg me-3">商品一覧へ</a>
+      <a href="{% url 'final:product_add' %}" class="btn btn-primary btn-lg">新規商品登録</a>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
