@@ -1,0 +1,32 @@
+{% extends 'final/base.html' %}
+{% load static %}
+
+{% block title %}在庫変更{% endblock %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 500px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title mb-4">{{ view.kwargs.pk }} の在庫変更</h3>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label fw-bold" for="{{ field.id_for_label }}">
+              {{ field.label }}{% if field.field.required %} *{% endif %}
+            </label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="text-danger small mt-1">{{ field.errors.0 }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">✅ 在庫を更新</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -123,3 +123,11 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'login'
+
+# ログイン成功後にリダイレクトする先
+LOGIN_REDIRECT_URL = 'final:index'
+
+# ログアウト後にリダイレクトする先（任意）
+LOGOUT_REDIRECT_URL = 'login'

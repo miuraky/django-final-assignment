@@ -1,0 +1,29 @@
+{% extends 'final/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">{{ title }}</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>在庫</th>
+      <th>価格</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td>{{ product.stock }}</td>
+      <td>{{ product.price }}</td>
+      <td><a href="{% url 'final:product_edit' product.pk %}" class="btn btn-sm btn-outline-primary">編集</a></td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">該当する商品はありません。</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

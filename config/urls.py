@@ -16,8 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('final/', include('final.urls')),
+    # path('final/', include('final.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
+    # あなたのアプリ（名前空間 final）を /final/ にマウント
+    path('final/', include(('final.urls', 'final'), namespace='final')),
+
+    # ルート / にアクセスしたらダッシュボード（final:index）へリダイレクト
+    path('', RedirectView.as_view(pattern_name='final:index', permanent=False)),
 ]

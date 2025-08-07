@@ -1,0 +1,6 @@
+{% extends 'final/base.html' %}
+{% block title %}{% if form.instance.pk %}商品編集{% else %}商品登録{% endif %}{% endblock %}
+{% block content %}
+<h2>{% if form.instance.pk %}商品編集{% else %}商品登録{% endif %}</h2>
+<form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn btn-primary">保存</button></form>
+{% endblock %}
