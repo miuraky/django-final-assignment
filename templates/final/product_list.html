@@ -1,0 +1,29 @@
+{% extends 'final/base.html' %}
+{% block title %}商品一覧{% endblock %}
+{% block content %}
+<h2>商品一覧</h2>
+<form method="get" class="d-flex mb-3">
+  <input type="text" name="q" value="{{ request.GET.q }}" placeholder="SKU or 商品名で検索" class="form-control me-2">
+  <button class="btn btn-outline-primary">検索</button>
+  <a href="{% url 'final:product_add' %}" class="btn btn-primary ms-auto">新規登録</a>
+</form>
+<table class="table">
+  <thead><tr><th>SKU</th><th>商品名</th><th>在庫</th><th>最低在庫</th><th>操作</th></tr></thead>
+  <tbody>
+    {% for p in products %}
+    <tr {% if p.stock < p.minimum_stock %}class="table-danger"{% endif %}>
+      <td>{{ p.code }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.stock }} {{ p.unit }}</td>
+      <td>{{ p.minimum_stock }}</td>
+      <td>
+        <a href="{% url 'final:product_edit' p.pk %}" class="btn btn-sm btn-secondary">編集</a>
+        <a href="{% url 'final:stock_change' p.pk %}" class="btn btn-sm btn-warning">在庫変更</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">データがありません</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
