@@ -1,5 +1,8 @@
-*.log
-*.pyc
-__pycache__/
-db-volumes/
+venv
 db.sqlite3
+.vscode
+pycache
+*.pyc
+.DS_Store
+.env
+venv/
