@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}権限エラー{% endblock %}
+
+{% block content %}
+<div class="container my-5 text-center">
+  <h2 class="text-danger">🚫 アクセスできません</h2>
+  <p>この操作は <strong>管理者のみ</strong> 実行可能です。</p>
+  <a href="{% url 'final:index' %}" class="btn btn-primary mt-3">トップページへ戻る</a>
+</div>
+{% endblock %}

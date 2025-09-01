@@ -28,4 +28,15 @@ urlpatterns = [
 
     # ルート / にアクセスしたらダッシュボード（final:index）へリダイレクト
     path('', RedirectView.as_view(pattern_name='final:index', permanent=False)),
+    
+    path('accounts/', include('accounts.urls')),  
 ]
+
+from django.conf.urls import handler403
+from django.shortcuts import render
+
+def custom_permission_denied_view(request, exception=None):
+    return render(request, "errors/no_permission.html", status=403)
+
+handler403 = custom_permission_denied_view
+

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path , include
 from django.contrib.auth import views as auth_views
 from . import views
 
@@ -15,4 +15,5 @@ urlpatterns = [
 
     path('stock/<int:pk>/change/', views.StockChangeView.as_view(), name='stock_change'),
     path('history/', views.StockHistoryView.as_view(), name='stock_history'),
+    path('accounts/', include('django.contrib.auth.urls')),     # ユーザー認証用のビューを呼び出す
 ]

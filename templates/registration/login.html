@@ -1,31 +1,38 @@
 {# templates/registration/login.html #}
-{% extends 'final/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
 
 {% block title %}ログイン{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
-  <div class="col-md-4">
+  <div class="col-md-6">
+
     <h2 class="mb-4 text-center">ログイン</h2>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.non_field_errors }}
-      
-      <div class="mb-3">
-        <label for="{{ form.username.id_for_label }}" class="form-label">ユーザー名</label>
-        {{ form.username }}  {# フィルタを使わずそのまま出力 #}
-        {{ form.username.errors }}
+
+    {% if user.is_authenticated %}
+      <div class="alert alert-success text-center">
+        <p>{{ user }} でログインしています</p>
+        <a href="{% url 'logout' %}">
+          {% bootstrap_button button_type="button" button_class="btn-danger" content="ログアウト" size="md" %}
+        </a>
       </div>
-      
-      <div class="mb-3">
-        <label for="{{ form.password.id_for_label }}" class="form-label">パスワード</label>
-        {{ form.password }}
-        {{ form.password.errors }}
-      </div>
-      
-      <button type="submit" class="btn btn-primary w-100">ログイン</button>
-    </form>
+
+    {% else %}
+      <section>
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          {% bootstrap_form form %}
+          <div class="d-flex gap-2">
+            {% bootstrap_button button_type="submit" content="ログイン" button_class="btn-primary" size="md" %}
+            <a href="{% url 'accounts:signup' %}" class="btn btn-secondary btn-md">新規登録</a>
+          </div>
+        </form>
+      </section>
+    {% endif %}
+
   </div>
 </div>
 {% endblock %}
