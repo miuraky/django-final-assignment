@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from .models import Product, StockHistory
 from .forms import ProductForm, StockHistoryForm
 import django.db.models as models
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # ダッシュボード
 class DashboardView(LoginRequiredMixin, TemplateView):
