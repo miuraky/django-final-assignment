@@ -22,7 +22,7 @@ class ProductForm(forms.ModelForm):
         fields = ['name', 'category', 'price']  # 必要に応じて
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '例：りんご'}),
-            'category': forms.Select(attrs={'class': 'form-select'}),
+            'category': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '例：果物'}),
             'price': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '例：100'}),
         }
 
